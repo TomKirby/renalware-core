@@ -3448,8 +3448,10 @@ CREATE TABLE pathology_observation_descriptions (
     name character varying,
     measurement_unit_id integer,
     loinc_code character varying,
+    display_group integer,
     display_order integer,
-    display_order_letters integer
+    letter_group integer,
+    letter_order integer
 );
 
 
@@ -11922,6 +11924,20 @@ CREATE UNIQUE INDEX master_index_hd_diaries_on_hospital_unit_id ON hd_diaries US
 
 
 --
+-- Name: obx_unique_display_grouping; Type: INDEX; Schema: renalware; Owner: -
+--
+
+CREATE INDEX obx_unique_display_grouping ON pathology_observation_descriptions USING btree (display_group, display_order);
+
+
+--
+-- Name: obx_unique_letter_grouping; Type: INDEX; Schema: renalware; Owner: -
+--
+
+CREATE INDEX obx_unique_letter_grouping ON pathology_observation_descriptions USING btree (letter_group, letter_order);
+
+
+--
 -- Name: patient_bookmarks_uniqueness; Type: INDEX; Schema: renalware; Owner: -
 --
 
@@ -14494,6 +14510,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180223100420'),
 ('20180226124724'),
 ('20180226132410'),
-('20180301095040');
+('20180301095040'),
+('20180305134959');
 
 
